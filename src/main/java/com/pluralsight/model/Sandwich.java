@@ -23,7 +23,7 @@ public class Sandwich implements MenuItem{
         return breadType;
     }
 
-    public List<Topping> getTopping() {
+    public List<Topping> getToppings() {
         return toppings;
     }
 
@@ -35,10 +35,20 @@ public class Sandwich implements MenuItem{
         this.toasted = toasted;
     }
 
+    public void addTopping(Topping topping) {
+        this.toppings.add(topping);
+    }
+
     @Override
     public double getPrice() {
+        double price;
 
-        return 0;
+        price = sandwichSize.getBasePrice();
+        for(Topping topping: toppings){
+            price += topping.getPrice(sandwichSize);
+        }
+
+        return price;
     }
 }
 
