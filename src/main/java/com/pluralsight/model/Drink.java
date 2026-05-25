@@ -17,26 +17,11 @@ public class Drink implements MenuItem{
 
     @Override
     public double getPrice() {
-        switch (drinkSize){
-            case SMALL -> {
-                return 2.00;
-            }
-            case MEDIUM -> {
-                return 2.50;
-            }
-            case LARGE -> {
-                return 3.00;
-            }
-            default -> {
-                return 0;
-            }
-
-        }
+        return switch (drinkSize){
+            case SMALL ->  2.00;
+            case MEDIUM -> 2.50;
+            case LARGE ->  3.00;
+        };
     }
 }
 
-enum DrinkSize{
-    SMALL,
-    MEDIUM,
-    LARGE
-}
