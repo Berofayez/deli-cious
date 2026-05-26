@@ -3,6 +3,7 @@ package com.pluralsight.model;
 public class Topping {
     private String name;
     private ToppingType category;
+    private boolean extra;
 
     public Topping(String name, ToppingType category) {
         this.name = name;
@@ -17,8 +18,12 @@ public class Topping {
         return category;
     }
 
-    public double getPrice(SandwichSize size) {
-        return category.getPrice(size);
+    public boolean isExtra() {
+        return extra;
+    }
+
+    public void setExtra(boolean extra) {
+        this.extra = extra;
     }
 }
 

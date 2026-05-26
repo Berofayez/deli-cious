@@ -41,14 +41,7 @@ public class Sandwich implements MenuItem{
 
     @Override
     public double getPrice() {
-        double price;
-
-        price = sandwichSize.getBasePrice();
-        for(Topping topping: toppings){
-            price += topping.getPrice(sandwichSize);
-        }
-
-        return price;
+        return PricingService.calculateSandwichPrice(this);
     }
 }
 
