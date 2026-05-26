@@ -55,4 +55,12 @@ public class UserOutput {
     public static void printSeparator() {
         System.out.println("-".repeat(44));
     }
+
+    public static void printError(String message) {
+        System.out.println(ColorCodes.RED + message + ColorCodes.RESET);
+    }
+
+    public static void printSuccess(String message) {
+        System.out.println(ColorCodes.GREEN + message + ColorCodes.RESET);
+    }
 }
