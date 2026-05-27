@@ -8,6 +8,8 @@ public class Sandwich implements MenuItem{
     private List<Topping> toppings;
     private boolean toasted;
 
+    public Sandwich(){}
+
     public Sandwich(SandwichSize sandwichSize, BreadType breadType, List<Topping> toppings, boolean toasted) {
         this.sandwichSize = sandwichSize;
         this.breadType = breadType;

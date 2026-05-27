@@ -2,12 +2,7 @@ package com.pluralsight.ui;
 
 import com.pluralsight.model.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AddSandwich {
-
-    Sandwich sandwich;
 
     public static void display(Order order) {
 
@@ -23,13 +18,15 @@ public class AddSandwich {
 
     private Sandwich buildSandwich() {
 
+        Sandwich sandwich = new Sandwich();
+
         BreadType bread = chooseBread();
         sandwich.setBreadType(bread);
 
         SandwichSize size = chooseSize();
         sandwich.setSandwichSize(size);
 
-        addToppings();
+        addToppings(sandwich);
 
         boolean toasted = chooseToasted();
         sandwich.setToasted(toasted);
@@ -72,13 +69,151 @@ public class AddSandwich {
         }
     }
 
-    private void addToppings() {
+    private void addToppings(Sandwich sandwich) {
 
-        askForMeat();
-        askForCheese();
+        askForMeat(sandwich);
+        askForCheese(sandwich);
+        askRegularToppings(sandwich);
+        askSauces(sandwich);
     }
 
-    private void askForCheese() {
+    private void askSauces(Sandwich sandwich) {
+
+        UserOutput.printSubHeader("Do you want sauces?");
+
+        while (true) {
+
+            String input = UserInput.getStringInput().toLowerCase();
+
+            switch (input) {
+
+                case "yes":
+                case "y":
+                    showSauces(sandwich);
+                    return;
+
+                case "no":
+                case "n":
+                    return;
+
+                default:
+                    UserOutput.printError("Please enter yes or no.");
+            }
+        }
+    }
+
+    private void showSauces(Sandwich sandwich) {
+
+        boolean adding = true;
+
+        while (adding) {
+
+            UserOutput.printSubHeader("Choose a sauce:");
+
+            UserOutput.printOptions(
+                    "mayo",
+                    "mustard",
+                    "ketchup",
+                    "ranch",
+                    "thousand islands",
+                    "vinaigrette"
+            );
+
+            int choice = UserInput.getValidInput(1, 6);
+
+            Topping topping = null;
+
+            switch (choice) {
+
+                case 1 -> topping = new Topping("mayo", ToppingType.SAUCE, false);
+                case 2 -> topping = new Topping("mustard", ToppingType.SAUCE, false);
+                case 3 -> topping = new Topping("ketchup", ToppingType.SAUCE, false);
+                case 4 -> topping = new Topping("ranch", ToppingType.SAUCE, false);
+                case 5 -> topping = new Topping("thousand islands", ToppingType.SAUCE, false);
+                case 6 -> topping = new Topping("vinaigrette", ToppingType.SAUCE, false);
+
+            }
+
+            sandwich.addTopping(topping);
+
+            UserOutput.printSubHeader("Add another sauce? (y/n)");
+
+            adding = UserInput.getYesNo();
+        }
+    }
+
+    private void askRegularToppings(Sandwich sandwich) {
+
+        UserOutput.printSubHeader("Do you want regular toppings?");
+
+        while (true) {
+
+            String input = UserInput.getStringInput().toLowerCase();
+
+            switch (input) {
+
+                case "yes":
+                case "y":
+                    showRegularToppings(sandwich);
+                    return;
+
+                case "no":
+                case "n":
+                    return;
+
+                default:
+                    UserOutput.printError("Please enter yes or no.");
+            }
+        }
+    }
+
+    private void showRegularToppings(Sandwich sandwich) {
+
+        boolean adding = true;
+
+        while (adding) {
+
+            UserOutput.printSubHeader("Choose a regular topping:");
+
+            UserOutput.printOptions(
+                    "lettuce",
+                    "peppers",
+                    "onions",
+                    "tomatoes",
+                    "jalapeños",
+                    "cucumbers",
+                    "pickles",
+                    "guacamole",
+                    "mushrooms"
+            );
+
+            int choice = UserInput.getValidInput(1, 9);
+
+            Topping topping = null;
+
+            switch (choice) {
+
+                case 1 -> topping = new Topping("lettuce", ToppingType.REGULAR, false);
+                case 2 -> topping = new Topping("peppers", ToppingType.REGULAR, false);
+                case 3 -> topping = new Topping("onions", ToppingType.REGULAR, false);
+                case 4 -> topping = new Topping("tomatoes", ToppingType.REGULAR, false);
+                case 5 -> topping = new Topping("jalapeños", ToppingType.REGULAR, false);
+                case 6 -> topping = new Topping("cucumbers", ToppingType.REGULAR, false);
+                case 7 -> topping = new Topping("pickles", ToppingType.REGULAR, false);
+                case 8 -> topping = new Topping("guacamole", ToppingType.REGULAR, false);
+                case 9 -> topping = new Topping("mushrooms", ToppingType.REGULAR, false);
+
+            }
+
+            sandwich.addTopping(topping);
+
+            UserOutput.printSubHeader("Add another regular topping? (y/n)");
+
+            adding = UserInput.getYesNo();
+        }
+    }
+
+    private void askForCheese(Sandwich sandwich) {
         UserOutput.printSubHeader(
                 "Do you want cheese?"
         );
@@ -94,7 +229,7 @@ public class AddSandwich {
                 case "yes":
                 case "y":
 
-                    showCheeseOptions();
+                    showCheeseOptions(sandwich);
                     return;
 
                 case "no":
@@ -111,7 +246,7 @@ public class AddSandwich {
         }
     }
 
-    private void showCheeseOptions() {
+    private void showCheeseOptions(Sandwich sandwich) {
         UserOutput.printSubHeader(
                 "Choose cheese:"
         );
@@ -137,73 +272,50 @@ public class AddSandwich {
 
         switch (input) {
 
-            case 1 ->
-                    topping = new Topping(
-                            "american",
-                            ToppingType.CHEESE,
-                            extra
-                    );
-
-            case 2 ->
-                    topping = new Topping(
-                            "provolone",
-                            ToppingType.CHEESE,
-                            extra
-                    );
-
-            case 3 ->
-                    topping = new Topping(
-                            "cheddar",
-                            ToppingType.CHEESE,
-                            extra
-                    );
-
-            case 4 ->
-                    topping = new Topping(
-                            "swiss",
-                            ToppingType.CHEESE,
-                            extra
-                    );
+            case 1 -> topping = new Topping("american", ToppingType.CHEESE, extra);
+            case 2 -> topping = new Topping("provolone", ToppingType.CHEESE, extra);
+            case 3 -> topping = new Topping("cheddar",ToppingType.CHEESE,extra);
+            case 4 -> topping = new Topping("swiss", ToppingType.CHEESE, extra);
         }
 
         sandwich.addTopping(topping);
     }
 
-    private void askForMeat () {
+    private void askForMeat(Sandwich sandwich) {
 
-            UserOutput.printSubHeader(
-                    "Do you want meat?"
-            );
+        UserOutput.printSubHeader(
+                "Do you want meat?"
+        );
 
-            while (true) {
+        while (true) {
 
-                String input = UserInput
-                        .getStringInput()
-                        .toLowerCase();
+            String input = UserInput
+                    .getStringInput()
+                    .toLowerCase();
 
-                switch (input) {
+            switch (input) {
 
-                    case "yes":
-                    case "y":
+                case "yes":
+                case "y":
 
-                        showMeatOptions();
-                        return;
+                    showMeatOptions(sandwich);
+                    return;
 
-                    case "no":
-                    case "n":
+                case "no":
+                case "n":
 
-                        return;
+                    return;
 
-                    default:
+                default:
 
-                        UserOutput.printError(
-                                "Please enter yes or no."
-                        );
-                }
+                    UserOutput.printError(
+                            "Please enter yes or no."
+                    );
             }
         }
+    }
 
-    private void showMeatOptions() {
+    private void showMeatOptions(Sandwich sandwich) {
 
         UserOutput.printSubHeader(
                 "Choose meat:"
@@ -232,47 +344,12 @@ public class AddSandwich {
 
         switch (input) {
 
-            case 1 ->
-                    topping = new Topping(
-                            "steak",
-                            ToppingType.MEAT,
-                            extra
-                    );
-
-            case 2 ->
-                    topping = new Topping(
-                            "ham",
-                            ToppingType.MEAT,
-                            extra
-                    );
-
-            case 3 ->
-                    topping = new Topping(
-                            "salami",
-                            ToppingType.MEAT,
-                            extra
-                    );
-
-            case 4 ->
-                    topping = new Topping(
-                            "roast beef",
-                            ToppingType.MEAT,
-                            extra
-                    );
-
-            case 5 ->
-                    topping = new Topping(
-                            "chicken",
-                            ToppingType.MEAT,
-                            extra
-                    );
-
-            case 6 ->
-                    topping = new Topping(
-                            "bacon",
-                            ToppingType.MEAT,
-                            extra
-                    );
+            case 1 -> topping = new Topping("steak",ToppingType.MEAT,extra);
+            case 2 -> topping = new Topping("ham",ToppingType.MEAT,extra);
+            case 3 -> topping = new Topping("salami",ToppingType.MEAT,extra);
+            case 4 -> topping = new Topping("roast beef",ToppingType.MEAT,extra);
+            case 5 -> topping = new Topping("chicken",ToppingType.MEAT, extra);
+            case 6 -> topping = new Topping("bacon", ToppingType.MEAT, extra);
         }
 
         sandwich.addTopping(topping);
