@@ -19,12 +19,24 @@ public class Sandwich implements MenuItem{
         return sandwichSize;
     }
 
+    public void setSandwichSize(SandwichSize sandwichSize) {
+        this.sandwichSize = sandwichSize;
+    }
+
     public BreadType getBreadType() {
         return breadType;
     }
 
+    public void setBreadType(BreadType breadType) {
+        this.breadType = breadType;
+    }
+
     public List<Topping> getToppings() {
         return toppings;
+    }
+
+    public void setToppings(List<Topping> toppings) {
+        this.toppings = toppings;
     }
 
     public boolean isToasted() {

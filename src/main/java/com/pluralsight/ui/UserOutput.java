@@ -46,7 +46,7 @@ public class UserOutput {
         }
     }
 
-    public static void printToppingOptions(String... options) {
+    public static void printDashOptions(String... options) {
         for (String option : options) {
             System.out.println("- " + option);
         }
