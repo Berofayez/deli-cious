@@ -2,9 +2,11 @@ package com.pluralsight.model;
 
 public class Drink implements MenuItem{
     private DrinkSize drinkSize;
+    private String flavor;
 
-    public Drink(DrinkSize drinkSize) {
+    public Drink(DrinkSize drinkSize, String flavor) {
         this.drinkSize = drinkSize;
+        this.flavor = flavor;
     }
 
     public DrinkSize getDrinkSize() {

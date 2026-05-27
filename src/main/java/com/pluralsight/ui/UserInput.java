@@ -10,7 +10,9 @@ public class UserInput {
     }
 
     public static int getIntInput(){
-        return scanner.nextInt();
+        int input = scanner.nextInt();
+        scanner.nextLine();
+        return input;
     }
 
     public static int getValidInput(int min, int max){

@@ -8,4 +8,8 @@ public class Order {
     public void addItem(MenuItem menuItem) {
         menuItems.add(menuItem);
     }
+
+    public List<MenuItem> getMenuItems(){
+        return menuItems;
+    }
 }

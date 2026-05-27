@@ -1,5 +1,6 @@
 package com.pluralsight.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sandwich implements MenuItem{
@@ -8,7 +9,9 @@ public class Sandwich implements MenuItem{
     private List<Topping> toppings;
     private boolean toasted;
 
-    public Sandwich(){}
+    public Sandwich(){
+        this.toppings = new ArrayList<>();
+    }
 
     public Sandwich(SandwichSize sandwichSize, BreadType breadType, List<Topping> toppings, boolean toasted) {
         this.sandwichSize = sandwichSize;
