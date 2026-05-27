@@ -5,9 +5,10 @@ public class Topping {
     private ToppingType category;
     private boolean extra;
 
-    public Topping(String name, ToppingType category) {
+    public Topping(String name, ToppingType category, boolean extra) {
         this.name = name;
         this.category = category;
+        this.extra = extra;
     }
 
     public String getName() {

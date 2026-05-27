@@ -1,9 +1,9 @@
 package com.pluralsight.ui;
 
-import com.pluralsight.model.BreadType;
-import com.pluralsight.model.Order;
-import com.pluralsight.model.Sandwich;
-import com.pluralsight.model.SandwichSize;
+import com.pluralsight.model.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddSandwich {
 
@@ -73,9 +73,118 @@ public class AddSandwich {
 
     private void addToppings() {
 
+        askForMeat();
+    }
+
+    private void askForMeat() {
+
         UserOutput.printSubHeader(
                 "Do you want meat?"
         );
+
+        while (true) {
+
+            String input = UserInput
+                    .getStringInput()
+                    .toLowerCase();
+
+            switch (input) {
+
+                case "yes":
+                case "y":
+
+                    showMeatOptions();
+                    return;
+
+                case "no":
+                case "n":
+
+                    return;
+
+                default:
+
+                    UserOutput.printError(
+                            "Please enter yes or no."
+                    );
+            }
+        }
+    }
+
+    List<Topping> toppings = new ArrayList<>();
+
+    private void showMeatOptions() {
+
+        UserOutput.printSubHeader(
+                "Choose meat:"
+        );
+
+        UserOutput.printOptions(
+                "steak",
+                "ham",
+                "salami",
+                "roast beef",
+                "chicken",
+                "bacon"
+        );
+
+        int input =
+                UserInput.getValidInput(1, 6);
+
+        UserOutput.printSubHeader(
+                "Do you want extra meat?"
+        );
+
+        boolean extra =
+                UserInput.getYesNo();
+
+        Topping topping = null;
+
+        switch (input) {
+
+            case 1 ->
+                    topping = new Topping(
+                            "steak",
+                            ToppingType.MEAT,
+                            extra
+                    );
+
+            case 2 ->
+                    topping = new Topping(
+                            "ham",
+                            ToppingType.MEAT,
+                            extra
+                    );
+
+            case 3 ->
+                    topping = new Topping(
+                            "salami",
+                            ToppingType.MEAT,
+                            extra
+                    );
+
+            case 4 ->
+                    topping = new Topping(
+                            "roast beef",
+                            ToppingType.MEAT,
+                            extra
+                    );
+
+            case 5 ->
+                    topping = new Topping(
+                            "chicken",
+                            ToppingType.MEAT,
+                            extra
+                    );
+
+            case 6 ->
+                    topping = new Topping(
+                            "bacon",
+                            ToppingType.MEAT,
+                            extra
+                    );
+        }
+
+        sandwich.addTopping(topping);
     }
 
     private SandwichSize chooseSize() {
