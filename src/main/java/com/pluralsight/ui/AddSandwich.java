@@ -9,7 +9,7 @@ public class AddSandwich {
 
     Sandwich sandwich;
 
-    public static void display(Order order){
+    public static void display(Order order) {
 
         AddSandwich addSandwich = new AddSandwich();
 
@@ -20,7 +20,8 @@ public class AddSandwich {
         UserOutput.printSuccess("Sandwich added successfully!");
 
     }
-    private Sandwich buildSandwich(){
+
+    private Sandwich buildSandwich() {
 
         BreadType bread = chooseBread();
         sandwich.setBreadType(bread);
@@ -74,12 +75,12 @@ public class AddSandwich {
     private void addToppings() {
 
         askForMeat();
+        askForCheese();
     }
 
-    private void askForMeat() {
-
+    private void askForCheese() {
         UserOutput.printSubHeader(
-                "Do you want meat?"
+                "Do you want cheese?"
         );
 
         while (true) {
@@ -93,7 +94,7 @@ public class AddSandwich {
                 case "yes":
                 case "y":
 
-                    showMeatOptions();
+                    showCheeseOptions();
                     return;
 
                 case "no":
@@ -110,7 +111,97 @@ public class AddSandwich {
         }
     }
 
-    List<Topping> toppings = new ArrayList<>();
+    private void showCheeseOptions() {
+        UserOutput.printSubHeader(
+                "Choose cheese:"
+        );
+
+        UserOutput.printOptions(
+                "american",
+                "provolone",
+                "cheddar",
+                "swiss"
+        );
+
+        int input =
+                UserInput.getValidInput(1, 4);
+
+        UserOutput.printSubHeader(
+                "Do you want extra cheese?"
+        );
+
+        boolean extra =
+                UserInput.getYesNo();
+
+        Topping topping = null;
+
+        switch (input) {
+
+            case 1 ->
+                    topping = new Topping(
+                            "american",
+                            ToppingType.CHEESE,
+                            extra
+                    );
+
+            case 2 ->
+                    topping = new Topping(
+                            "provolone",
+                            ToppingType.CHEESE,
+                            extra
+                    );
+
+            case 3 ->
+                    topping = new Topping(
+                            "cheddar",
+                            ToppingType.CHEESE,
+                            extra
+                    );
+
+            case 4 ->
+                    topping = new Topping(
+                            "swiss",
+                            ToppingType.CHEESE,
+                            extra
+                    );
+        }
+
+        sandwich.addTopping(topping);
+    }
+
+    private void askForMeat () {
+
+            UserOutput.printSubHeader(
+                    "Do you want meat?"
+            );
+
+            while (true) {
+
+                String input = UserInput
+                        .getStringInput()
+                        .toLowerCase();
+
+                switch (input) {
+
+                    case "yes":
+                    case "y":
+
+                        showMeatOptions();
+                        return;
+
+                    case "no":
+                    case "n":
+
+                        return;
+
+                    default:
+
+                        UserOutput.printError(
+                                "Please enter yes or no."
+                        );
+                }
+            }
+        }
 
     private void showMeatOptions() {
 
