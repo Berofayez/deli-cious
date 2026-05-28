@@ -25,6 +25,8 @@ public class ReceiptService {
             writer.write("Total: $" + order.getTotalPrice());
             writer.newLine();
 
+            writer.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }

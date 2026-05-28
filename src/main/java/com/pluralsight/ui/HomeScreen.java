@@ -4,11 +4,12 @@ public class HomeScreen {
 
     public void display(){
         UserOutput.printHeader("Welcome to DELI-cious");
-        UserOutput.printHomeOrCheckoutOptions("New Order", "Exit");
+
 
         boolean running = true;
 
         while (running){
+            UserOutput.printHomeOrCheckoutOptions("New Order", "Exit");
             int input = UserInput.getValidInput(0, 1);
             switch (input) {
                 case 1:

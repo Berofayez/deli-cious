@@ -26,7 +26,10 @@ public class OrderScreen {
 
                 case 3 -> AddChips.display(order);
 
-                case 4 -> Checkout.display(order);
+                case 4 -> {
+                    Checkout.display(order);
+                    return;
+                }
 
                 case 0 -> {
                     return;
