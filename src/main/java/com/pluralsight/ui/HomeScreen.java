@@ -10,12 +10,15 @@ public class HomeScreen {
 
         while (running){
             int input = UserInput.getValidInput(0, 1);
-            switch (input){
+            switch (input) {
                 case 1:
                     OrderScreen.display();
+                    break;
+
                 case 0:
                     UserOutput.printSubHeader("GoodBye!");
                     running = false;
+                    break;
             }
         }
 
