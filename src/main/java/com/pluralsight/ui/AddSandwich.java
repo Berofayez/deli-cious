@@ -426,7 +426,7 @@ public class AddSandwich {
                 "Select your bread:"
         );
 
-        UserOutput.printDashOptions(
+        UserOutput.printOptions(
                 "white",
                 "wheat",
                 "rye",
@@ -435,22 +435,20 @@ public class AddSandwich {
 
         while (true) {
 
-            String input = UserInput
-                    .getStringInput()
-                    .toLowerCase();
+            int input = UserInput.getValidInput(1, 4);
 
             switch (input) {
 
-                case "white":
+                case 1:
                     return BreadType.WHITE;
 
-                case "wheat":
+                case 2:
                     return BreadType.WHEAT;
 
-                case "rye":
+                case 3:
                     return BreadType.RYE;
 
-                case "wrap":
+                case 4:
                     return BreadType.WRAP;
 
                 default:
