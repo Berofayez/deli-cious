@@ -60,5 +60,39 @@ public class Sandwich implements MenuItem{
     public double getPrice() {
         return PricingService.calculateSandwichPrice(this);
     }
+
+    @Override
+    public String toString() {
+
+        StringBuilder sb = new StringBuilder();
+
+        sb.append(sandwichSize)
+                .append(" ")
+                .append(breadType)
+                .append(" sandwich");
+
+        if (toasted) {
+            sb.append(" (toasted)");
+        }
+
+        if (!toppings.isEmpty()) {
+
+            sb.append("\n  Toppings:");
+
+            for (Topping topping : toppings) {
+                sb.append("\n   - ")
+                        .append(topping.getName());
+
+                if (topping.isExtra()) {
+                    sb.append(" (extra)");
+                }
+            }
+        }
+
+        sb.append("\n  Price: $")
+                .append(String.format("%.2f", getPrice()));
+
+        return sb.toString();
+    }
 }
 

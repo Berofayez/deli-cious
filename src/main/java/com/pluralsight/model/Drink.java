@@ -25,5 +25,11 @@ public class Drink implements MenuItem{
             case LARGE ->  3.00;
         };
     }
+
+    @Override
+    public String toString() {
+        return drinkSize + " " + flavor + " Drink ($" +
+                String.format("%.2f", getPrice()) + ")";
+    }
 }
 

@@ -19,4 +19,10 @@ public class Chips implements MenuItem{
     public double getPrice() {
         return 1.50;
     }
+
+    @Override
+    public String toString() {
+        return chipType + " Chips ($" +
+                String.format("%.2f", getPrice()) + ")";
+    }
 }

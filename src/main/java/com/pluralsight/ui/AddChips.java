@@ -5,27 +5,8 @@ import com.pluralsight.model.*;
 public class AddChips {
     public static void display(Order order){
 
-        UserOutput.printSubHeader("Do you want chips?");
-
-        while (true) {
-
-            String input = UserInput.getStringInput().toLowerCase();
-
-            switch (input) {
-
-                case "yes":
-                case "y":
-                    order.addItem(new Chips(showChipsType()));
-                    return;
-
-                case "no":
-                case "n":
-                    return;
-
-                default:
-                    UserOutput.printError("Please enter yes or no.");
-            }
-        }
+        order.addItem(new Chips(showChipsType()));
+        UserOutput.printSuccess("Chips added successfully!");
     }
 
     private static ChipType showChipsType() {

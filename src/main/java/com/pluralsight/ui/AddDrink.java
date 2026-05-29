@@ -8,39 +8,15 @@ public class AddDrink {
 
     public static void display(Order order) {
 
-        UserOutput.printSubHeader("Do you want a drink?");
+        DrinkSize size = chooseDrinkSize();
 
-        while (true) {
+        String flavor = chooseFlavor();
 
-            String input = UserInput
-                    .getStringInput()
-                    .toLowerCase();
+        Drink drink = new Drink(size, flavor);
 
-            switch (input) {
+        order.addItem(drink);
 
-                case "yes":
-                case "y":
-
-                    DrinkSize size = chooseDrinkSize();
-
-                    String flavor = chooseFlavor();
-
-                    Drink drink = new Drink(size, flavor);
-
-                    order.addItem(drink);
-
-                    UserOutput.printSuccess("Drink added successfully!");
-
-                    return;
-
-                case "no":
-                case "n":
-                    return;
-
-                default:
-                    UserOutput.printError("Please enter yes or no.");
-            }
-        }
+        UserOutput.printSuccess("Drink added successfully!");
     }
 
 
