@@ -1,4 +1,6 @@
 package com.pluralsight.model;
+import com.pluralsight.enums.ChipType;
+import com.pluralsight.enums.DrinkSize;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

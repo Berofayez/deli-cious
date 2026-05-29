@@ -1,4 +1,8 @@
-package com.pluralsight.model;
+package com.pluralsight.service;
+
+import com.pluralsight.model.Sandwich;
+import com.pluralsight.enums.SandwichSize;
+import com.pluralsight.model.Topping;
 
 public class PricingService {
     public static double calculateSandwichPrice(Sandwich sandwich) {

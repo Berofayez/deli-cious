@@ -1,5 +1,6 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.enums.ChipType;
 import com.pluralsight.model.*;
 
 public class AddChips {

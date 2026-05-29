@@ -1,5 +1,7 @@
 package com.pluralsight.model;
 
+import com.pluralsight.enums.ChipType;
+
 public class Chips implements MenuItem{
     ChipType chipType;
 

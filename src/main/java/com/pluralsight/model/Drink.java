@@ -1,5 +1,7 @@
 package com.pluralsight.model;
 
+import com.pluralsight.enums.DrinkSize;
+
 public class Drink implements MenuItem{
     private DrinkSize drinkSize;
     private String flavor;

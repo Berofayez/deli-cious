@@ -1,7 +1,7 @@
 package com.pluralsight.ui;
 
 import com.pluralsight.model.Drink;
-import com.pluralsight.model.DrinkSize;
+import com.pluralsight.enums.DrinkSize;
 import com.pluralsight.model.Order;
 
 public class AddDrink {

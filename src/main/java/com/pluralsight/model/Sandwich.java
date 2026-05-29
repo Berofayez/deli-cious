@@ -1,5 +1,10 @@
 package com.pluralsight.model;
 
+import com.pluralsight.enums.BreadType;
+import com.pluralsight.enums.SandwichSize;
+import com.pluralsight.enums.SideType;
+import com.pluralsight.service.PricingService;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,16 +13,18 @@ public class Sandwich implements MenuItem{
     private BreadType breadType;
     private List<Topping> toppings;
     private boolean toasted;
+    private SideType side;
 
     public Sandwich(){
         this.toppings = new ArrayList<>();
     }
 
-    public Sandwich(SandwichSize sandwichSize, BreadType breadType, List<Topping> toppings, boolean toasted) {
+    public Sandwich(SandwichSize sandwichSize, BreadType breadType, List<Topping> toppings, boolean toasted, SideType side) {
         this.sandwichSize = sandwichSize;
         this.breadType = breadType;
         this.toppings = toppings;
         this.toasted = toasted;
+        this.side = side;
     }
 
     public SandwichSize getSandwichSize() {
@@ -52,6 +59,14 @@ public class Sandwich implements MenuItem{
         this.toasted = toasted;
     }
 
+    public SideType getSide() {
+        return side;
+    }
+
+    public void setSide(SideType side) {
+        this.side = side;
+    }
+
     public void addTopping(Topping topping) {
         this.toppings.add(topping);
     }
@@ -69,27 +84,27 @@ public class Sandwich implements MenuItem{
         sb.append(sandwichSize)
                 .append(" ")
                 .append(breadType)
-                .append(" sandwich");
+                .append(" Sandwich");
 
         if (toasted) {
-            sb.append(" (toasted)");
+            sb.append(" (Toasted)");
         }
 
-        if (!toppings.isEmpty()) {
+        sb.append("\n");
 
-            sb.append("\n  Toppings:");
-
-            for (Topping topping : toppings) {
-                sb.append("\n   - ")
-                        .append(topping.getName());
-
-                if (topping.isExtra()) {
-                    sb.append(" (extra)");
-                }
-            }
+        for (Topping topping : toppings) {
+            sb.append("   - ")
+                    .append(topping)
+                    .append("\n");
         }
 
-        sb.append("\n  Price: $")
+        if(side != SideType.NONE){
+            sb.append("   Side: ")
+                    .append(side)
+                    .append("\n");
+        }
+
+        sb.append("   Price: $")
                 .append(String.format("%.2f", getPrice()));
 
         return sb.toString();

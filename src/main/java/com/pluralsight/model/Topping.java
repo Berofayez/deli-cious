@@ -1,5 +1,7 @@
 package com.pluralsight.model;
 
+import com.pluralsight.enums.ToppingType;
+
 public class Topping {
     private String name;
     private ToppingType category;

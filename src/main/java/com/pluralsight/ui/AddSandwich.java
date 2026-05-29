@@ -1,5 +1,9 @@
 package com.pluralsight.ui;
 
+import com.pluralsight.enums.BreadType;
+import com.pluralsight.enums.SandwichSize;
+import com.pluralsight.enums.SideType;
+import com.pluralsight.enums.ToppingType;
 import com.pluralsight.model.*;
 
 public class AddSandwich {
@@ -31,7 +35,28 @@ public class AddSandwich {
         boolean toasted = chooseToasted();
         sandwich.setToasted(toasted);
 
+        chooseSide(sandwich);
+
         return sandwich;
+    }
+
+    private void chooseSide(Sandwich sandwich) {
+
+        UserOutput.printSubHeader("Would you like a side?");
+
+        UserOutput.printOptions(
+                "Au Jus",
+                "Sauce",
+                "None"
+        );
+
+        int choice = UserInput.getValidInput(1, 3);
+
+        switch (choice) {
+            case 1 -> sandwich.setSide(SideType.AU_JUS);
+            case 2 -> sandwich.setSide(SideType.SAUCE);
+            case 3 -> sandwich.setSide(SideType.NONE);
+        }
     }
 
     private boolean chooseToasted() {
